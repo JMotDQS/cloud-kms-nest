@@ -10,8 +10,8 @@ export class LotsController {
 		DELETE /lots/:id
 	*/
 
-	@Get() // GET /lots or /lots?active=value&lot_name=value
-	getLots(@Query('active') active?: '1' | '0') {
+	@Get() // GET /lots or /lots?lot_active=value&lot_name=value
+	getLots(@Query('lot_active') lot_active?: '1' | '0') {
 		return [];
 	}
 
