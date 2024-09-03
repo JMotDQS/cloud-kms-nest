@@ -34,4 +34,4 @@ export class UsersController {
 	deleteUser(@Param('id') id: string) {
 		return { id };
 	}
-} 
+}
