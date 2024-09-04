@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { LotsService } from './lots.service';
 
 @Controller('lots') // /lots
 export class LotsController {
+	constructor(private readonly lotsService: LotsService) {};
 	/*
 		GET /lots
 		GET /lots/:id
@@ -12,26 +14,26 @@ export class LotsController {
 
 	@Get() // GET /lots or /lots?lot_active=value&lot_name=value
 	getLots(@Query('lot_active') lot_active?: '1' | '0') {
-		return [];
+		return this.lotsService.getLots(lot_active);
 	}
 
 	@Get(':id') // GET /lots/:id
 	getLot(@Param('id') id: string) {
-		return {id};
+		return this.lotsService.getLot(parseInt(id));
 	}
 
 	@Post() // POST /lots
-	create(@Body() lot: {}) {
-		return lot;
+	createLot(@Body() lot: {lot_name: string, lot_address: string, lot_city: string, lot_state: string, lot_zip: number, lot_capacity: number, lot_active: number, lot_man: string}) {
+		return this.lotsService.createLot(lot);
 	}
 
 	@Patch(':id') // PUT/PATCH /lots/:id
-	updateLot(@Param('id') id: string, @Body() lotUpdate: {}) {
-		return { id, ...lotUpdate };
+	updateLot(@Param('id') id: string, @Body() lotUpdate: {lot_name?: string, lot_address?: string, lot_city?: string, lot_state?: string, lot_zip?: number, lot_capacity?: number, lot_active?: number, lot_man?: string}) {
+		return this.lotsService.updateLot(parseInt(id), lotUpdate);
 	}
 
 	@Delete(':id') // DELETE /lots/:id
 	deleteLot(@Param('id') id: string) {
-		return { id };
+		return this.lotsService.deleteLot(parseInt(id));
 	}
 }

@@ -399,11 +399,45 @@ export class LotsService {
 		  "lot_active": 0,
 		  "lot_man": "Ford"
 		}
-	];
-}
+	]
 
-getLots(lot_active?: '1' | '0') {
-	if(lot_active) {
-		return this.lots.filter(lot => lot.lot_active === lot_active)
+	getLots(lot_active?: '1' | '0') {
+		if(lot_active) {
+			return this.lots.filter(lot => lot.lot_active === parseInt(lot_active));
+		}
+		return this.lots;
+	}
+
+	getLot(id: number) {
+		const lot = this.lots.find(lot => lot.pk_id === id);
+		return lot;
+	}
+
+	createLot(lot: {lot_name: string, lot_address: string, lot_city: string, lot_state: string, lot_zip: number, lot_capacity: number, lot_active: number, lot_man: string}) {
+		const lotHighestId = [...this.lots].sort((a, b) => b.pk_id - a.pk_id);
+		const newLot = {
+			pk_id: lotHighestId[0].pk_id + 1,
+			...lot
+		};
+
+		this.lots.push(newLot);
+		return newLot;
+	}
+
+	updateLot(id: number, updatedLot: {lot_name?: string, lot_address?: string, lot_city?: string, lot_state?: string, lot_zip?: number, lot_capacity?: number, lot_active?: number, lot_man?: string}) {
+		this.lots = this.lots.map(lot => {
+			if(lot.pk_id === id) {
+				return {...lot, ...updatedLot};
+			}
+			return lot;
+		})
+
+		return this.getLot(id);
+	}
+
+	deleteLot(id: number) {
+		const deletedLot = this.getLot(id);
+		this.lots = this.lots.filter(lot => lot.pk_id !== id);
+		return deletedLot;
 	}
 }
