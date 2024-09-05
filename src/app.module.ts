@@ -1,11 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { LotsModule } from './lots/lots.module';
 
 @Module({
-	imports: [UsersModule, LotsModule],
+	imports: [
+		TypeOrmModule.forRoot({
+			type: 'mssql',
+			host: 'localhost',
+			port: 1433,
+			username: '',
+			password: '',
+			database: 'kms_cloud',
+			entities: [],
+			synchronize: true,
+		}),
+		UsersModule,
+		LotsModule
+	],
 	controllers: [AppController],
 	providers: [AppService],
 })
