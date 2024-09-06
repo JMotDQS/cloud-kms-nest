@@ -7,7 +7,7 @@ import { LotsModule } from './lots/lots.module';
 
 @Module({
 	imports: [
-		TypeOrmModule.forRoot({
+		/*TypeOrmModule.forRoot({
 			type: 'mssql',
 			host: 'localhost',
 			port: 1433,
@@ -16,7 +16,7 @@ import { LotsModule } from './lots/lots.module';
 			database: 'kms_cloud',
 			entities: [],
 			synchronize: true,
-		}),
+		}),*/
 		UsersModule,
 		LotsModule
 	],
