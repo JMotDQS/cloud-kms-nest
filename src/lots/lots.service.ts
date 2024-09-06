@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { CreateLotDto } from './dto/create-lot.dto';
+import { UpdateLotDto } from './dto/update-lot.dto';
 
 @Injectable()
 export class LotsService {
@@ -413,21 +415,21 @@ export class LotsService {
 		return lot;
 	}
 
-	createLot(lot: {lot_name: string, lot_address: string, lot_city: string, lot_state: string, lot_zip: number, lot_capacity: number, lot_active: number, lot_man: string}) {
+	createLot(createLotDto: CreateLotDto) {
 		const lotHighestId = [...this.lots].sort((a, b) => b.pk_id - a.pk_id);
 		const newLot = {
 			pk_id: lotHighestId[0].pk_id + 1,
-			...lot
+			...createLotDto
 		};
 
 		this.lots.push(newLot);
 		return newLot;
 	}
 
-	updateLot(id: number, updatedLot: {lot_name?: string, lot_address?: string, lot_city?: string, lot_state?: string, lot_zip?: number, lot_capacity?: number, lot_active?: number, lot_man?: string}) {
+	updateLot(id: number, updateLotDto: UpdateLotDto) {
 		this.lots = this.lots.map(lot => {
 			if(lot.pk_id === id) {
-				return {...lot, ...updatedLot};
+				return {...lot, ...updateLotDto};
 			}
 			return lot;
 		})

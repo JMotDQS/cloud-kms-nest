@@ -1,5 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { LotsService } from './lots.service';
+import { ParseIntPipe, ValidationPipe } from '@nestjs/common';
+import { CreateLotDto } from './dto/create-lot.dto';
+import { UpdateLotDto } from './dto/update-lot.dto';
 
 @Controller('lots') // /lots
 export class LotsController {
@@ -18,22 +21,22 @@ export class LotsController {
 	}
 
 	@Get(':id') // GET /lots/:id
-	getLot(@Param('id') id: string) {
-		return this.lotsService.getLot(parseInt(id));
+	getLot(@Param('id', ParseIntPipe) id: number) {
+		return this.lotsService.getLot(id);
 	}
 
 	@Post() // POST /lots
-	createLot(@Body() lot: {lot_name: string, lot_address: string, lot_city: string, lot_state: string, lot_zip: number, lot_capacity: number, lot_active: number, lot_man: string}) {
-		return this.lotsService.createLot(lot);
+	createLot(@Body(ValidationPipe) createLotDto: CreateLotDto) {
+		return this.lotsService.createLot(createLotDto);
 	}
 
 	@Patch(':id') // PUT/PATCH /lots/:id
-	updateLot(@Param('id') id: string, @Body() lotUpdate: {lot_name?: string, lot_address?: string, lot_city?: string, lot_state?: string, lot_zip?: number, lot_capacity?: number, lot_active?: number, lot_man?: string}) {
-		return this.lotsService.updateLot(parseInt(id), lotUpdate);
+	updateLot(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) updateLotDto: UpdateLotDto) {
+		return this.lotsService.updateLot(id, updateLotDto);
 	}
 
 	@Delete(':id') // DELETE /lots/:id
-	deleteLot(@Param('id') id: string) {
-		return this.lotsService.deleteLot(parseInt(id));
+	deleteLot(@Param('id', ParseIntPipe) id: number) {
+		return this.lotsService.deleteLot(id);
 	}
 }
