@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.349fd547.css",
+    "main.js": "/static/js/main.8b4d7bac.js",
+    "static/media/DQS_logo.svg": "/static/media/DQS_logo.6595810692460907d8d69aac5e6a6bca.svg",
+    "index.html": "/index.html",
+    "main.349fd547.css.map": "/static/css/main.349fd547.css.map",
+    "main.8b4d7bac.js.map": "/static/js/main.8b4d7bac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.349fd547.css",
+    "static/js/main.8b4d7bac.js"
+  ]
+}

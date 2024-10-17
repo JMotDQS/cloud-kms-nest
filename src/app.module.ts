@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { LotsModule } from './lots/lots.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
 	imports: [
@@ -17,6 +19,10 @@ import { LotsModule } from './lots/lots.module';
 			entities: [],
 			synchronize: true,
 		}),*/
+		ServeStaticModule.forRoot({
+			rootPath: join(__dirname, '..', 'client'),
+			exclude: ['api/*'],
+		}),
 		UsersModule,
 		LotsModule
 	],
@@ -24,3 +30,7 @@ import { LotsModule } from './lots/lots.module';
 	providers: [AppService],
 })
 export class AppModule {}
+function forRoot(arg0: { rootPath: any; }): import("@nestjs/common").Type<any> | import("@nestjs/common").DynamicModule | Promise<import("@nestjs/common").DynamicModule> | import("@nestjs/common").ForwardReference<any> {
+	throw new Error('Function not implemented.');
+}
+
