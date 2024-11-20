@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLotDto } from './dto/create-lot.dto';
 import { UpdateLotDto } from './dto/update-lot.dto';
 
@@ -412,6 +412,8 @@ export class LotsService {
 
 	getLot(id: number) {
 		const lot = this.lots.find(lot => lot.pk_id === id);
+
+		if(!lot) throw new NotFoundException('Lot Not Found');
 		return lot;
 	}
 
