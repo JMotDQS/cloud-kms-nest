@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
 import { LotsModule } from './lots/lots.module';
-import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
 	imports: [
@@ -16,16 +16,6 @@ import { SequelizeModule } from '@nestjs/sequelize';
 			database: 'kms_v2_mysql',
 			models: [],
 		}),
-		/*TypeOrmModule.forRoot({
-			type: 'mssql',
-			host: 'localhost',
-			port: 1433,
-			username: '',
-			password: '',
-			database: 'kms_cloud',
-			entities: [],
-			synchronize: true,
-		}),*/
 		UsersModule,
 		LotsModule
 	],
