@@ -13,7 +13,7 @@ export class LotsController {
 		PUT/PATCH /lots/:id
 		DELETE /lots/:id
 	*/
-
+/*
 	@Get() // GET /lots or /lots?lot_active=value&lot_name=value
 	getLots(@Query('lot_active') lot_active?: '1' | '0') {
 		return this.lotsService.getLots(lot_active);
@@ -38,4 +38,5 @@ export class LotsController {
 	deleteLot(@Param('id', ParseIntPipe) id: number) {
 		return this.lotsService.deleteLot(id);
 	}
+*/
 }

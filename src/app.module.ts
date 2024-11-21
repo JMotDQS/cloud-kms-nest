@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
 import { LotsModule } from './lots/lots.module';
+import { Lots } from './lots/lots.model';
 
 @Module({
 	imports: [
@@ -14,7 +15,7 @@ import { LotsModule } from './lots/lots.module';
 			username: 'root',
 			password: 'L0rdOfL1ghtn!ng',
 			database: 'kms_v2_mysql',
-			models: [],
+			models: [Lots],
 		}),
 		UsersModule,
 		LotsModule

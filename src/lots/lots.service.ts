@@ -1,9 +1,34 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { Lots } from './lots.model';
 import { CreateLotDto } from './dto/create-lot.dto';
 import { UpdateLotDto } from './dto/update-lot.dto';
 
 @Injectable()
 export class LotsService {
+	constructor(
+		@InjectModel(Lots)
+		private lotsModel: typeof Lots,
+	) {}
+
+	async findAll(): Promise<Lots[]> {
+		return this.lotsModel.findAll();
+	}
+
+	findOne(pk_id: string): Promise<Lots> {
+		return this.lotsModel.findOne({
+			where: {
+				pk_id,
+			},
+		});
+	}
+
+	async remove(pk_id: string): Promise<void> {
+		const lot = await this.findOne(pk_id);
+		await lot.destroy();
+	}
+
+/*
 	private lots = [
 		{
 		  "pk_id": 5,
@@ -402,7 +427,8 @@ export class LotsService {
 		  "lot_man": "Ford"
 		}
 	]
-
+*/
+/*
 	getLots(lot_active?: '1' | '0') {
 		if(lot_active) {
 			return this.lots.filter(lot => lot.lot_active === parseInt(lot_active));
@@ -444,4 +470,5 @@ export class LotsService {
 		this.lots = this.lots.filter(lot => lot.pk_id !== id);
 		return deletedLot;
 	}
+*/
 }
