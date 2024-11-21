@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Lots } from './lots.model';
 import { LotsController } from './lots.controller';
 import { LotsService } from './lots.service';
+import { lotsProviders } from './lots.providers';
+import { DatabaseModule } from 'src/database.module';
 
 @Module({
-	imports: [SequelizeModule.forFeature([Lots])],
-	providers: [LotsService],
-	controllers: [LotsController]
+	imports: [DatabaseModule],
+	controllers: [LotsController],
+	providers: [
+		LotsService,
+		...lotsProviders,
+	]
 })
 export class LotsModule {}
