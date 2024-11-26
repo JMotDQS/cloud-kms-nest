@@ -9,10 +9,10 @@ export const databaseProviders = [
 		const sequelize = new Sequelize({
 			dialect: 'mysql',
 			host: 'localhost',
-			port: 3306,
+			port: 3369,
 			username: 'root',
-			password: 'password',
-			database: 'nest',
+			password: 'L0rdOfL1ghtn!ng',
+			database: 'kms_v2_mysql',
 		});
 		sequelize.addModels([Lot]);
 		await sequelize.sync();
