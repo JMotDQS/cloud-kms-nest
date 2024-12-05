@@ -2,7 +2,7 @@ import { IntegerDataType } from 'sequelize';
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 @Table
-export class Users extends Model {
+export class User extends Model {
 	@Column({
 		primaryKey: true,
 		type: DataType.UUID,
